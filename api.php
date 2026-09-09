@@ -58,6 +58,55 @@ switch ($action) {
         }
         break;
 
+    case 'login':
+        try{
+            $pdo = new PDO($dsn, $db_user, $db_pass, $options);
+
+            $input = json_decode(file_get_contents('php://input'),true);
+            $email = trim($_POST['email'] ?? '');
+            $password= trim($_POST['password'] ?? '');
+            if(empty($email) || empty($password)) {
+                http_response_code(400);
+                echo json_encode([
+                    'status'  => 'error',
+                    'message' => 'Email and password are required.'
+                ]);
+                exit;
+            }
+
+            $stmt = $pdo-> prepare("SELECT * FROM Users WHERE email = :email");
+            $stmt->execute(['email' => $email]);
+            $user = $stmt->fetch();
+
+        
+
+            if($user && password_verify($password, $user['passwordHash'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['email'] = $user['email'];
+
+                http_response_code(200);
+                echo json_encode([
+                    'status'  => 'success',
+                    'message' => 'Login successful.',
+                    'user'    => ['email' => $user['email']]
+                ]);
+            } else {
+                // Invalid credentials
+                http_response_code(401);
+                echo json_encode([
+                    'status'  => 'error',
+                    'message' => 'Invalid email or password.'
+                ]);
+            }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            echo json_encode([
+                'status'  => 'error',
+                'message' => 'Database error occurred: ' . $e->getMessage()
+            ]);
+        }
+        break;
+
     default:
         http_response_code(400);
         echo json_encode([
