@@ -1,0 +1,5 @@
+# Add to your .htaccess file
+<Files "dev8oodb_config.php">
+    Order Allow,Deny
+    Deny from all
+</Files>
