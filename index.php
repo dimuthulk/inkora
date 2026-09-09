@@ -20,6 +20,8 @@
         <h1>InkOra</h1>
         <!-- මේ බොත්තම එබුවාම තමයි Register Popup එක එන්නේ -->
         <button class="action-btn" onclick="openRegisterModal()">Register</button>
+        <a href="./components/login_modal.php" class="action-btn">Login</a>
+        
     </header>
 
     <main>
@@ -32,6 +34,7 @@
 
     <!-- Register Modal Component එක මෙතනින් Include කරගන්නවා -->
     <?php include 'components/register_modal.php'; ?>
+    
 
 </body>
 </html>
