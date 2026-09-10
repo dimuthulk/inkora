@@ -3,38 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InkOra - Home</title>
-    <link rel="stylesheet" href="bin/theme.css"> <!-- ඔයාගේ අනාගත Theme CSS එක -->
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #F9FAFB; margin: 0; padding: 0; }
-        header { background: #FFFFFF; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        h1 { color: #1F2937; margin: 0; }
-        .action-btn { background: #4F46E5; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        main { padding: 30px; max-width: 800px; margin: auto; }
-        .post-placeholder { background: #FFFFFF; padding: 20px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #6B7280; text-align: center; }
-    </style>
+    <title>Inkora - Share Your Story</title>
+    <!-- Base Theme CSS -->
+    <link rel="stylesheet" href="bin/theme.css">
+    <link rel="stylesheet" href="components/modal.css">
 </head>
 <body>
 
-    <header>
-        <h1>InkOra</h1>
-        <!-- මේ බොත්තම එබුවාම තමයි Register Popup එක එන්නේ -->
-        <button class="action-btn" onclick="openRegisterModal()">Register</button>
-        <a href="./components/login_modal.php" class="action-btn">Login</a>
-        
+    <!-- Navbar Component -->
+    <?php include 'components/navbar.php'; ?>
+
+    <header class="hero" style="text-align: center; padding: 4rem 1rem; background-color: var(--surface); border-bottom: 1px solid var(--border);">
+        <h1 style="margin-top: 0; font-size: 2.5rem;">Welcome to Inkora</h1>
+        <p style="color: var(--secondary-text); font-size: 1.2rem;">“Share Your Story. Inspire the World.”</p>
     </header>
 
-    <main>
-        <h2 style="color: #1F2937;">Latest Posts</h2>
-        <div id="postsContainer">
-            <!-- අනාගතයේදී Database එකෙන් Posts මෙතනට Load වේවි -->
-            <div class="post-placeholder">No posts available yet. Be the first to create one!</div>
+    <main class="container">
+        <h2>Latest Posts</h2>
+        <div id="posts-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+            <div style="background-color: var(--surface); padding: 2rem; border-radius: 8px; border: 1px solid var(--border); text-align: center; grid-column: 1 / -1; color: var(--secondary-text);">
+                No posts available yet. Be the first to create one!
+            </div>
         </div>
     </main>
 
-    <!-- Register Modal Component එක මෙතනින් Include කරගන්නවා -->
-    <?php include 'components/register_modal.php'; ?>
-    
+    <!-- Modals -->
+    <?php 
+        include 'components/login_modal.php'; 
+        include 'components/register_modal.php'; 
+    ?>
 
+    <script src="components/modal.js"></script>
+
+    <!-- Theme Toggle Logic -->
+<script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('inkora_theme');
+        if (savedTheme === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            themeToggleBtn.textContent = '☀️ Light';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                document.body.removeAttribute('data-theme');
+                localStorage.setItem('inkora_theme', 'light');
+                themeToggleBtn.textContent = '🌙 Dark';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('inkora_theme', 'dark');
+                themeToggleBtn.textContent = '☀️ Light';
+            }
+        });
+    </script>
 </body>
 </html>
