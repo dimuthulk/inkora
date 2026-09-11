@@ -1,6 +1,4 @@
 
-// const POSTS = <?php echo $postsJson; ?>;
-
 const state = {
   query: "",
   categories: new Set(),   // empty = all categories
