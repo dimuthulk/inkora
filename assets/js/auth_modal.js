@@ -13,10 +13,43 @@ function closeLoginModal() {
 
 const loginForm = document.getElementById("loginForm");
 if (loginForm) {
-  loginForm.addEventListener("submit", (e) => {
+  loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    document.getElementById("loginMessage").textContent = "Logging in...";
-    // (Login API එකට දත්ත යවන කේතය අනාගතයේදී මෙතනට එකතු කරන්න)
+    const msg = document.getElementById("loginMessage");
+    msg.textContent = "Logging in...";
+    msg.style.color = "#6B7280";
+
+    const payload = {
+      email: document.getElementById("loginEmail").value,
+      password: document.getElementById("loginPassword").value,
+    };
+
+    try {
+        const loginApiUrl = window.location.pathname.includes('/pages/')
+        ? '../api.php?action=login'
+        : 'api.php?action=login';
+
+      const res = await fetch(loginApiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (res.ok) {
+        msg.style.color = "var(--success)";
+        msg.textContent = data.message;
+        setTimeout(() => {
+          window.location.href = '/inkora/index.php';
+        }, 1000);
+      } else {
+        msg.style.color = "var(--error)";
+        msg.textContent = data.message;
+      }
+    } catch (err) {
+      msg.style.color = "var(--error)";
+      msg.textContent = "Connection Error: " + err.message;
+    }
   });
 }
 
@@ -51,7 +84,11 @@ if (registerForm) {
     };
 
     try {
-      const res = await fetch("api.php?action=register_user", {
+      const registerApiUrl = window.location.pathname.includes('/pages/')
+        ? '../api.php?action=register_user'
+        : 'api.php?action=register_user';
+
+      const res = await fetch(registerApiUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

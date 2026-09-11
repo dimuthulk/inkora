@@ -29,8 +29,8 @@
 
     <!-- Modals -->
     <?php 
-        include 'components/sign_in.php';
-        include 'components/sign_up.php';
+        //include 'components/sign_in.php';
+        //include 'components/sign_up.php';
     ?>
 
     <script src="assets/js/auth_modal.js"></script>
