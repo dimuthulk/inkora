@@ -1,5 +1,7 @@
-/* ================= Inkora Search Page ================= */
-*{box-sizing:border-box;}
+/* Inkora Search Page */
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -15,9 +17,8 @@ body{
   padding:0 0 60px;
 }
 
-/* ---------- Hero ---------- */
-/* Hero now simply fills the wrap (which is itself full-bleed), so the
-   sidebar/results below share the exact same left/right edges as the hero. */
+/* Hero */
+
 .hero-banner{
   position:relative;
   width:100%;
@@ -79,9 +80,11 @@ body{
   flex-shrink:0;
 }
 
-.search-box button:hover{background:#4338ca;}
+.search-box button:hover{
+  background:#4338ca;
+}
 
-/* ---------- Layout ---------- */
+/*  Layout  */
 .search-layout{
   display:grid;
   grid-template-columns:270px 1fr;
@@ -90,10 +93,12 @@ body{
 }
 
 @media (max-width:860px){
-  .search-layout{grid-template-columns:1fr;}
+  .search-layout{
+    grid-template-columns:1fr;
+  }
 }
 
-/* ---------- Sidebar filters ---------- */
+/*  Sidebar filters  */
 .filter-card{
   background:#fff;
   border:1px solid #e5e7eb;
@@ -117,7 +122,9 @@ body{
   color:#6b7280;
 }
 
-.filter-card.collapsed .chev{transform:rotate(180deg);}
+.filter-card.collapsed .chev{
+  transform:rotate(180deg);
+}
 
 .filter-body{
   margin-top:14px;
@@ -127,7 +134,9 @@ body{
   overflow:hidden;
 }
 
-.filter-card.collapsed .filter-body{display:none;}
+.filter-card.collapsed .filter-body{
+  display:none;
+}
 
 .filter-option{
   display:flex;
@@ -144,10 +153,19 @@ body{
   gap:10px;
 }
 
-.filter-option input{accent-color:#4f46e5;width:16px;height:16px;cursor:pointer;}
-.filter-option .count{color:#6b7280;font-size:.82rem;}
+.filter-option input{
+  accent-color:#4f46e5;
+  width:16px;
+  height:16px;
+  cursor:pointer;
+}
 
-/* ---------- Results header ---------- */
+.filter-option .count{
+  color:#6b7280;
+  font-size:.82rem;
+}
+
+/*  Results header  */
 .results-header{
   display:flex;
   align-items:center;
@@ -156,18 +174,46 @@ body{
   min-height:24px;
 }
 
-#found-text{font-size:.95rem;color:#6b7280;}
-#found-text b{color:#1f2333;}
-
-.view-toggle{display:flex;gap:6px;}
-.view-toggle button{
-  width:34px;height:34px;border-radius:8px;border:1px solid #e5e7eb;
-  background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#6b7280;
+#found-text{
+  font-size:.95rem;
+  color:#6b7280;
 }
-.view-toggle button.active{background:#4f46e5;border-color:#4f46e5;color:#fff;}
 
-/* ---------- Result cards ---------- */
-#results-container{display:flex;flex-direction:column;gap:16px;}
+#found-text b{
+  color:#1f2333;
+}
+
+.view-toggle{
+  display:flex;
+  gap:6px;
+}
+
+.view-toggle button{
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  color:#6b7280;
+}
+
+.view-toggle button.active{
+  background:#4f46e5;
+  border-color:#4f46e5;
+  color:#fff;
+}
+
+/* Result cards */
+#results-container{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
 #results-container.grid-view{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
@@ -184,18 +230,29 @@ body{
   transition:box-shadow .2s, transform .2s;
 }
 
-.result-card:hover{box-shadow:0 8px 24px rgba(79,70,229,.12);transform:translateY(-2px);}
+.result-card:hover{
+  box-shadow:0 8px 24px rgba(79,70,229,.12);
+  transform:translateY(-2px);
+}
 
-#results-container.grid-view .result-card{flex-direction:column;}
+#results-container.grid-view .result-card{
+  flex-direction:column;
+}
 
 .result-card img{
-  width:150px;height:110px;object-fit:cover;border-radius:10px;flex-shrink:0;background:#e5e7eb;
+  width:150px;
+  height:110px;
+  object-fit:cover;
+  border-radius:10px;
+  flex-shrink:0;
+  background:#e5e7eb;
 }
-#results-container.grid-view .result-card img{width:100%;height:150px;}
 
-/* Content grid: col 1 = tag/title/desc, col 2 = name/date (own column,
-   kept in from the edge), col 3 = views/bookmark (stays at the far right,
-   position unchanged) */
+#results-container.grid-view .result-card img{
+  width:100%;
+  height:150px;
+}
+
 .result-content{
   flex:1;
   min-width:0;
@@ -205,13 +262,15 @@ body{
   column-gap:28px;
   row-gap:6px;
 }
+
 #results-container.grid-view .result-content{
   grid-template-columns:1fr;
   grid-template-rows:auto auto auto auto;
 }
 
 .tag{
-  grid-column:1;grid-row:1;
+  grid-column:1;
+  grid-row:1;
   display:inline-block;
   background:#eef0fe;
   color:#4f46e5;
@@ -222,12 +281,25 @@ body{
   width:fit-content;
 }
 
-.result-content h3{grid-column:1;grid-row:2;margin:2px 0 0;font-size:1.05rem;}
-.result-content h3 a{color:#1f2333;text-decoration:none;}
-.result-content h3 a:hover{color:#4f46e5;}
+.result-content h3{
+  grid-column:1;
+  grid-row:2;
+  margin:2px 0 0;
+  font-size:1.05rem;
+}
+
+.result-content h3 a{
+  color:#1f2333;
+  text-decoration:none;
+}
+
+.result-content h3 a:hover{
+  color:#4f46e5;
+}
 
 .result-desc{
-  grid-column:1;grid-row:3;
+  grid-column:1;
+  grid-row:3;
   color:#6b7280;
   font-size:.88rem;
   line-height:1.4;
@@ -237,33 +309,98 @@ body{
   overflow:hidden;
 }
 
-.meta-name-row{grid-column:2;grid-row:1;justify-self:start;align-self:start;display:flex;align-items:center;gap:8px;margin-right:18px;}
-.meta-date-row{grid-column:2;grid-row:2;justify-self:start;align-self:start;display:flex;align-items:center;gap:8px;margin-right:18px;}
-.meta-stats-row{grid-column:3;grid-row:3;justify-self:end;align-self:end;display:flex;align-items:center;gap:36px;}
+.meta-name-row{
+  grid-column:2;
+  grid-row:1;
+  justify-self:start;
+  align-self:start;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-right:18px;
+}
+
+.meta-date-row{
+  grid-column:2;
+  grid-row:2;
+  justify-self:start;
+  align-self:start;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-right:18px;
+}
+
+.meta-stats-row{
+  grid-column:3;
+  grid-row:3;
+  justify-self:end;
+  align-self:end;
+  display:flex;
+  align-items:center;
+  gap:36px;
+}
 
 #results-container.grid-view .meta-name-row,
 #results-container.grid-view .meta-date-row,
-#results-container.grid-view .meta-stats-row{grid-column:1;justify-self:start;}
-#results-container.grid-view .meta-stats-row{justify-self:end;grid-row:4;}
-
-.author-name{color:#1f2333;font-weight:600;font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.author-date{color:#6b7280;font-size:.78rem;}
-
-/* Generic person-silhouette avatar + calendar icon, both purple */
-.avatar{
-  width:24px;height:24px;border-radius:50%;flex-shrink:0;
-  background:#eef0fe;color:#4f46e5;
-  display:flex;align-items:center;justify-content:center;
+#results-container.grid-view .meta-stats-row{
+  grid-column:1;
+  justify-self:start;
 }
-.avatar svg{width:14px;height:14px;}
+
+#results-container.grid-view .meta-stats-row{
+  justify-self:end;
+  grid-row:4;
+}
+
+.author-name{
+  color:#1f2333;
+  font-weight:600;
+  font-size:.82rem;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.author-date{
+  color:#6b7280;
+  font-size:.78rem;
+}
+
+.avatar{
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  flex-shrink:0;
+  background:#eef0fe;
+  color:#4f46e5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.avatar svg{
+  width:14px;
+  height:14px;
+}
 
 .date-icon{
-  width:24px;height:24px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
+  width:24px;
+  height:24px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   color:#4f46e5;
 }
 
-.meta-stats-row span{display:flex;align-items:center;gap:4px;color:#6b7280;font-size:.8rem;}
+.meta-stats-row span{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  color:#6b7280;
+  font-size:.8rem;
+}
 
 .bookmark-btn{
   background:none;
@@ -276,9 +413,21 @@ body{
   color:#ffffff;
   -webkit-text-stroke:1px #6b7280;
 }
-.bookmark-btn svg{stroke:#6b7280;fill:#ffffff;transition:stroke .2s, fill .2s;}
-.bookmark-btn:hover svg{stroke:#4f46e5;}
-.bookmark-btn.active svg{stroke:#4f46e5;fill:#4f46e5;}
+
+.bookmark-btn svg{
+  stroke:#6b7280;
+  fill:#ffffff;
+  transition:stroke .2s, fill .2s;
+}
+
+.bookmark-btn:hover svg{
+  stroke:#4f46e5;
+}
+
+.bookmark-btn.active svg{
+  stroke:#4f46e5;
+  fill:#4f46e5;
+}
 
 .empty-state{
   text-align:center;

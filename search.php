@@ -6,6 +6,7 @@
   <title>Search Results — Inkora</title>
   <link rel="stylesheet" href="components/search.css">
 </head>
+
 <body>
 
   <div class="search-page-wrap">
