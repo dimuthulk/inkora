@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inkora - Share Your Story</title>
     <!-- Base Theme CSS -->
-    <link rel="stylesheet" href="bin/theme.css">
-    <link rel="stylesheet" href="components/modal.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/auth_modal.css">
 </head>
 <body>
 
@@ -29,11 +29,11 @@
 
     <!-- Modals -->
     <?php 
-        include 'components/login_modal.php'; 
-        include 'components/register_modal.php'; 
+        include 'components/sign_in.php';
+        include 'components/sign_up.php';
     ?>
 
-    <script src="components/modal.js"></script>
+    <script src="assets/js/auth_modal.js"></script>
 
     <!-- Theme Toggle Logic -->
 <script>
