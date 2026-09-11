@@ -1,5 +1,5 @@
 <!-- components/navbar.php -->
-<link rel="stylesheet" href="components/navbar.css">
+<link rel="stylesheet" href="assets/css/navbar.css">
 <nav class="navbar">
     <a href="index.php" class="nav-brand">
         <!-- SVG ලෝගෝ එක -->
@@ -10,7 +10,6 @@
     </a>
     <div class="nav-links">
         <button class="btn btn-outline" id="themeToggle">🌙 Dark</button>
-        <button class="btn btn-outline" onclick="openLoginModal()">Login</button>
-        <button class="btn btn-primary" onclick="openRegisterModal()">Sign Up</button>
+        <button class="btn btn-primary" onclick="openLoginModal()">Sign In</button>
     </div>
 </nav>
