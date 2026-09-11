@@ -5,21 +5,19 @@ try {
     $pdo = new PDO($dsn, $db_user, $db_pass, $options);
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS Users (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        first_name VARCHAR(100) NOT NULL,
-        last_name VARCHAR(100) NOT NULL,
-        birthday DATE,
-        email VARCHAR(150) NOT NULL UNIQUE,
-        password_hash VARCHAR(255) NOT NULL,
-        country VARCHAR(100),
-        role ENUM('admin', 'user') DEFAULT 'user',
-        reset_token VARCHAR(255) DEFAULT NULL,
-        reset_tokenExpires_at DATETIME DEFAULT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        
-    
-    )");
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    birthday DATE,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    country VARCHAR(100),
+    role ENUM('admin', 'user') DEFAULT 'user',
+    reset_token VARCHAR(255) DEFAULT NULL,
+    reset_tokenExpires_at DATETIME DEFAULT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)");
     echo "Users table created successfully.<br>";
 
     $pdo->exec("CREATE TABLE IF NOT EXISTS Posts (

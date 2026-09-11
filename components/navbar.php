@@ -10,6 +10,6 @@
     </a>
     <div class="nav-links">
         <button class="btn btn-outline" id="themeToggle">🌙 Dark</button>
-        <button class="btn btn-primary" onclick="openLoginModal()">Sign In</button>
+        <button class="btn btn-primary" onclick="window.location.href='pages/login.php'">Login</button>
     </div>
 </nav>
