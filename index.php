@@ -29,35 +29,46 @@
 
     <!-- Modals -->
     <?php 
-        //include 'components/sign_in.php';
-        //include 'components/sign_up.php';
+        include 'components/sign_in.php';
+        include 'components/sign_up.php';
     ?>
 
     <script src="assets/js/auth_modal.js"></script>
 
-    <!-- Theme Toggle Logic -->
+<!-- Theme Toggle Logic -->
 <script>
-        const themeToggleBtn = document.getElementById('themeToggle');
-        
-        // Load saved theme
-        const savedTheme = localStorage.getItem('inkora_theme');
-        if (savedTheme === 'dark') {
+    const themeToggleBtn = document.getElementById('themeToggle');
+    
+    // 1. LocalStorage එකේ Save කරපු Theme එකක් තියෙනවද බැලීම
+    const savedTheme = localStorage.getItem('inkora_theme');
+    
+    // 2. User ගේ OS/Browser Default Theme එක Dark ද කියලා බැලීම
+    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Theme එක Apply කරන Function එක
+    const applyTheme = (isDark) => {
+        if (isDark) {
             document.body.setAttribute('data-theme', 'dark');
             themeToggleBtn.textContent = '☀️ Light';
+        } else {
+            document.body.removeAttribute('data-theme');
+            themeToggleBtn.textContent = '🌙 Dark';
         }
+    };
 
-        themeToggleBtn.addEventListener('click', () => {
-            const isDark = document.body.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                document.body.removeAttribute('data-theme');
-                localStorage.setItem('inkora_theme', 'light');
-                themeToggleBtn.textContent = '🌙 Dark';
-            } else {
-                document.body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('inkora_theme', 'dark');
-                themeToggleBtn.textContent = '☀️ Light';
-            }
-        });
-    </script>
+    // පිටුව Load වෙද්දී නිවැරදි Theme එක ලබා දීම
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        applyTheme(true);
+    } else {
+        applyTheme(false);
+    }
+
+    // Toggle Button Click එක
+    themeToggleBtn.addEventListener('click', () => {
+        const isDark = document.body.getAttribute('data-theme') === 'dark';
+        applyTheme(!isDark);
+        localStorage.setItem('inkora_theme', !isDark ? 'dark' : 'light');
+    });
+</script>
 </body>
 </html>

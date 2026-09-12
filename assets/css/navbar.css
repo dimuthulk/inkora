@@ -1,13 +1,16 @@
-/* components/navbar.css */
+/* assets/css/navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 5%;
+  padding: 0.8rem 5%;
   background-color: var(--surface);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative; /* Mobile dropdown positioning සඳහා */
 }
+
+/* 1. Brand / Logo */
 .nav-brand {
   font-size: 1.5rem;
   font-weight: bold;
@@ -16,14 +19,228 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  z-index: 101; /* Menu එකට උඩින් තියෙන්න */
 }
 .inkora-logo {
-  width: 32px;
+  width: 28px;
   height: auto;
   color: var(--primary);
 }
+
+/* Wrapper for Search & Links */
+.nav-menu-wrapper {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+/* 2. Search Bar */
+.nav-search-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 16px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.nav-search-container:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+.search-icon {
+  color: var(--secondary-text);
+  margin-right: 10px;
+}
+.nav-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  color: var(--primary-text);
+  font-size: 0.95rem;
+}
+
+/* 3. Right Actions & Profile */
 .nav-links {
   display: flex;
   gap: 15px;
   align-items: center;
+}
+
+/* Dropdown Menu Item Improvements */
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+.profile-trigger:hover {
+  background-color: var(--background);
+}
+.profile-avatar {
+  background-color: var(--primary);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.profile-name {
+  color: var(--primary-text);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background-color: var(--surface);
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  z-index: 100;
+}
+.profile-dropdown:hover .dropdown-menu {
+  display: block;
+}
+.dropdown-menu a {
+  color: var(--primary-text);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+.dropdown-menu a svg {
+  color: var(--secondary-text);
+  transition: color 0.2s ease;
+}
+.dropdown-menu a:hover {
+  background-color: var(--background);
+  color: var(--primary);
+}
+.dropdown-menu a:hover svg {
+  color: var(--primary);
+}
+
+/* Hamburger Menu Icon */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 101;
+}
+.menu-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: var(--primary-text);
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+/* =========================================
+   Mobile Responsiveness (Max Width: 768px)
+========================================= */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  } /* Show Hamburger */
+
+  .nav-menu-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--surface);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* 🔹 Cut-off Issue එක නතර කිරීමට clip-path වෙනුවට Transform යෙදීම */
+    transform: translateY(-15px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+  }
+
+  .nav-menu-wrapper.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-search-container {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  /* 🔹 Profile Dropdown එක Mobile එකේදී Inline දිගහැරෙන ලෙස සැකසීම */
+  .profile-dropdown {
+    width: 100%;
+    margin-top: 15px;
+  }
+  .profile-trigger {
+    justify-content: space-between; /* නම සහ අයිකන් එක දෙපැත්තට කිරීම */
+    width: 100%;
+    background-color: var(
+      --background
+    ); /* Mobile එකේදී වෙනම බොත්තමක් සේ දිස්වීමට */
+    padding: 8px 12px;
+  }
+  .dropdown-menu {
+    position: relative; /* Floating වෙනුවට පහළට දිගහැරීම */
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  /* Hamburger Animation */
+  .menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
 }

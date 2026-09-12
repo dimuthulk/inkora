@@ -100,6 +100,7 @@ function login_user() {
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['email'] = $user['email'];
+        $_SESSION['first_name'] = $user['first_name'];
 
         http_response_code(200);
         echo json_encode([
